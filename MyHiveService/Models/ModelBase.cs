@@ -15,7 +15,7 @@ namespace MyHiveService.Models
         /// The tenant this belongs to
         /// </summary>
         [Required]
-        public Guid tenantId { get; set; }
+        public Guid? tenantId { get; set; }
 
         /// <summary>
         /// A unique id for this entity assigned by the client at the time of creation
