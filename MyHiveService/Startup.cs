@@ -23,6 +23,7 @@ using MyHive.Authentication;
 using MyHiveService.Models;
 using MyHiveService.Services;
 using MyHiveService.Services.CurrentUser;
+using MyHiveService.Services.Download;
 using MyHiveService.Services.Tenant;
 
 namespace MyHiveService
@@ -82,6 +83,7 @@ namespace MyHiveService
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISyncService, SyncService>();
+            services.AddScoped<IDownloadService, DownloadService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

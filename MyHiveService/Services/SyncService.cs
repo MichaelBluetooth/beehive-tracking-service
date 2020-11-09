@@ -22,8 +22,8 @@ namespace MyHiveService.Services
 
         public Hive syncHive(Hive hive)
         {
-            Hive existing = _ctx.Hives.Where(h => h.clientId == hive.clientId).FirstOrDefault();
-            if (null == hive.id || null == existing)
+            Hive existing = _ctx.Hives.Where(h => h.id == hive.id).FirstOrDefault();
+            if (null == existing)
             {
                 _logger.LogInformation("Syncing new hive", hive);
                 _ctx.Hives.Add(hive);
@@ -50,8 +50,8 @@ namespace MyHiveService.Services
 
         public HivePart syncPart(HivePart box)
         {
-            HivePart existing = _ctx.HiveParts.Where(b => b.clientId == box.clientId).FirstOrDefault(); ;
-            if (null == box.id || null == existing)
+            HivePart existing = _ctx.HiveParts.Where(b => b.id == box.id).FirstOrDefault(); ;
+            if (null == existing)
             {
                 _logger.LogInformation("Syncing new part", box);
                 _ctx.HiveParts.Add(box);
@@ -79,8 +79,8 @@ namespace MyHiveService.Services
 
         public Frame syncFrame(Frame frame)
         {
-            Frame existing = _ctx.Frames.Where(b => b.clientId == frame.clientId).FirstOrDefault(); ;
-            if (null == frame.id || null == existing)
+            Frame existing = _ctx.Frames.Where(b => b.id == frame.id).FirstOrDefault(); ;
+            if (null == existing)
             {
                 _logger.LogInformation("Syncing new frame", frame);
                 _ctx.Frames.Add(frame);
@@ -109,10 +109,10 @@ namespace MyHiveService.Services
             where InspectionType: InspectionBase
             where InspectionDTOType: InspectionBaseDTO
         {
-            InspectionType existing = inspections.Where(b => b.clientId == inspectionDTO.clientId).FirstOrDefault(); ;
+            InspectionType existing = inspections.Where(b => b.id == inspectionDTO.id).FirstOrDefault(); ;
             InspectionType inspection = _mapper.Map<InspectionType>(inspectionDTO);
 
-            if (null == inspection.id || null == existing)
+            if (null == inspection.id && null == existing)
             {
                 _logger.LogInformation("Syncing inspection frame", inspection);
                 inspections.Add(inspection);

@@ -6,16 +6,21 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MyHiveService.Models;
+using MyHiveService.Services.Download;
 
 namespace MyHiveService.Controllers
 {
     [ApiController]
     [Route("[controller]")]
+    [Authorize]
     public class HivesController : CRUDControllerBase<Hive>
     {
-        public HivesController(MyHiveDbContext context, ILogger<HivesController> logger)
+        private readonly IDownloadService _downloadService;
+
+        public HivesController(MyHiveDbContext context, ILogger<HivesController> logger, IDownloadService downloadService)
             : base(context, context.Hives, logger)
         {
+            _downloadService = downloadService;
         }
 
 
@@ -38,5 +43,13 @@ namespace MyHiveService.Controllers
             return entity;
         }
 
+        [HttpGet("download")]
+        
+        public ActionResult Download()
+        {
+            byte[] zip = _downloadService.downloadZip();
+            string fileName = DateTime.UtcNow.ToString("o");
+            return File(zip, System.Net.Mime.MediaTypeNames.Application.Zip, $"hivedata_{fileName}.zip");
+        }
     }
 }

@@ -1,5 +1,5 @@
 using System;
-using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
 
 namespace MyHiveService.Models
 {
@@ -17,8 +17,10 @@ namespace MyHiveService.Models
         public bool orientationFlights { get; set; }
         public string activityLevel { get; set; }
         public string details { get; set; }
-         public byte[] photo { get; set; }
-        
+
+        [JsonIgnore]
+        public byte[] photo { get; set; }
+
         //TODO: pests
     }
 }

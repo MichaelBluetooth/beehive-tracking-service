@@ -5,8 +5,9 @@ namespace MyHiveService.TestData
 {
     public class TestDataBuilder
     {
-        private static Guid user1Id = Guid.NewGuid();
-        private static Guid user2Id = Guid.NewGuid();
+        //Keep the GUIDs constant so that test data can persist between builds
+        private static Guid user1Id = Guid.Parse("abb588ea-5008-4b1a-ab4a-42e1e2679155");
+        private static Guid user2Id = Guid.Parse("af4bf219-de4d-4be9-9791-5b56f5caea08");
 
         public static void fill(MyHiveDbContext ctx)
         {

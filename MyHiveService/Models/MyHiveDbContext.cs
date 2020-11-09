@@ -61,6 +61,7 @@ namespace MyHiveService.Models
                 foreach (var change in changes)
                 {
                     (change.Entity as ModelBase).lastModified = DateTime.UtcNow;
+                    (change.Entity as ModelBase).tenantId = _tenantProvider.GetTenantId();
                 }
             }
         }

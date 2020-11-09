@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyHiveService.Models
 {
-    public class Frame : ModelBase
+    public class Frame : ModelBase, IInspectionable<FrameInspection>
     {
         [Required]
         public string label { get; set; }

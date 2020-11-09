@@ -17,7 +17,14 @@ namespace MyHiveService.Services.Tenant
 
         public Guid? GetTenantId()
         {
-            return Guid.Parse(_accessor?.HttpContext?.User.Claims.FirstOrDefault(c => c.Type == TENANT_CLAIM_TYPE)?.Value);
+            if (_accessor.HttpContext != null)
+            {
+                return Guid.Parse(_accessor?.HttpContext?.User?.Claims?.FirstOrDefault(c => c.Type == TENANT_CLAIM_TYPE)?.Value);
+            }
+            else
+            {
+                return Guid.Empty;
+            }
         }
     }
 }

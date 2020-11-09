@@ -14,7 +14,6 @@ namespace MyHiveService.Models
         /// <summary>
         /// The tenant this belongs to
         /// </summary>
-        [Required]
         public Guid? tenantId { get; set; }
 
         /// <summary>

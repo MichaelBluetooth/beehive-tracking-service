@@ -74,13 +74,6 @@ namespace MyHiveService.Controllers
             return Ok();
         }
 
-        [HttpPost("test")]
-        [Authorize]
-        public ActionResult Test()
-        {
-            return Ok();
-        }
-
         [HttpPost("refresh-token")]
         [Authorize]
         public async Task<ActionResult> RefreshToken([FromBody] RefreshTokenRequest request)
@@ -101,7 +94,7 @@ namespace MyHiveService.Controllers
                 return Ok(new LoginResult
                 {
                     UserName = userName,
-                    Role = User.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty,
+                    // Role = User.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty,
                     AccessToken = jwtResult.AccessToken,
                     RefreshToken = jwtResult.RefreshToken.TokenString
                 });

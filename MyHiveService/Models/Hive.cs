@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyHiveService.Models
 {
-    public class Hive : ModelBase
+    public class Hive : ModelBase, IInspectionable<HiveInspection>
     {
         [Required]
         public string label { get; set; }
