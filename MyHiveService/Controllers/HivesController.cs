@@ -11,7 +11,7 @@ using MyHiveService.Services.Download;
 namespace MyHiveService.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [Authorize]
     public class HivesController : CRUDControllerBase<Hive>
     {
@@ -22,7 +22,6 @@ namespace MyHiveService.Controllers
         {
             _downloadService = downloadService;
         }
-
 
         [HttpGet("{id}")]
         public override async Task<ActionResult<Hive>> Get(Guid id)
