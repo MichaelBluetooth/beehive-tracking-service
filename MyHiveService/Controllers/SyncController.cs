@@ -1,4 +1,5 @@
 ﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MyHiveService.Models;
@@ -9,6 +10,7 @@ namespace MyHiveService.Controllers
 {
     [ApiController]
     [Route("sync")]
+    [Authorize]
     public class SyncController : ControllerBase
     {
         private readonly MyHiveDbContext _context;
@@ -42,7 +44,7 @@ namespace MyHiveService.Controllers
             return Ok(syncd);
         }
 
-        [HttpPost]
+        [HttpPost] 
         [Route("frame")]
         public async Task<ActionResult<Frame>> SyncFrame(Frame frame)
         {

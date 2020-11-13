@@ -22,12 +22,14 @@ namespace MyHiveService.Controllers
         private readonly ILogger<AccountsController> _logger;
         private readonly IUserService _userService;
         private readonly IJwtAuthManager _jwtAuthManager;
+        private readonly MyHiveDbContext _context;
 
         public object TentantProvider { get; private set; }
 
-        public AccountsController(ILogger<AccountsController> logger, IUserService userService, IJwtAuthManager jwtAuthManager)
+        public AccountsController(ILogger<AccountsController> logger, MyHiveDbContext context, IUserService userService, IJwtAuthManager jwtAuthManager)
         {
             _logger = logger;
+            _context = context;
             _userService = userService;
             _jwtAuthManager = jwtAuthManager;
         }
@@ -62,6 +64,32 @@ namespace MyHiveService.Controllers
                 AccessToken = jwtResult.AccessToken,
                 RefreshToken = jwtResult.RefreshToken.TokenString
             });
+        }
+
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public ActionResult Register([FromBody] LoginRequest request)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest();
+            }
+
+            User user = _userService.findUserByUserName(request.UserName);
+            if (null != user)
+            {
+                _logger.LogInformation($"Anonymous user tried to register with [{request.UserName}], but it was already registered.");
+                return BadRequest("Username is already taken");
+            }
+
+            if (!_userService.isValidPassword(request.Password))
+            {
+                return BadRequest("Passwords must have a minimum of 8 characters, at least one uppercase letter and at least one number");
+            }
+
+            _userService.Register(request.UserName, request.Password);
+            _context.SaveChanges();
+            return Ok();
         }
 
         [HttpPost("logout")]
@@ -104,6 +132,8 @@ namespace MyHiveService.Controllers
                 return Unauthorized(e.Message); // return 401 so that the client side can redirect the user to login page
             }
         }
+
+
     }
 
     public class LoginRequest

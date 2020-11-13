@@ -1,5 +1,5 @@
-using System;
 using System.Linq;
+using System.Text.RegularExpressions;
 using MyHiveService.Models;
 
 namespace MyHive.Authentication
@@ -31,7 +31,30 @@ namespace MyHive.Authentication
 
         public User findUserByUserName(string username)
         {
-            return _ctx.Users.FirstOrDefault(u => u.username == username);
+            return _ctx.Users.FirstOrDefault(u => u.username.ToLower() == username.ToLower());
+        }
+
+        public User Register(string username, string password)
+        {
+            User newUser = new User()
+            {
+                username = username,
+                password = BCrypt.Net.BCrypt.HashPassword(password),
+            };
+            _ctx.Users.Add(newUser);
+
+            return newUser;
+        }
+
+        public bool isValidPassword(string password)
+        {
+            var hasNumber = new Regex(@"[0-9]+");
+            var hasUpperChar = new Regex(@"[A-Z]+");
+            var hasMinimum8Chars = new Regex(@".{8,}");
+
+            return hasUpperChar.IsMatch(password) &&
+                   hasNumber.IsMatch(password) &&
+                   hasMinimum8Chars.IsMatch(password);
         }
     }
 }

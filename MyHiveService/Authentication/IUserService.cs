@@ -1,4 +1,3 @@
-using System;
 using MyHiveService.Models;
 
 namespace MyHive.Authentication
@@ -7,5 +6,7 @@ namespace MyHive.Authentication
     {
         bool IsValidUserCredentials(string username, string password);
         User findUserByUserName(string username);
+        User Register(string username, string password);
+        bool isValidPassword(string password);
     }
 }

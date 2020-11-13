@@ -78,8 +78,8 @@ namespace MyHiveService
             services.AddHttpContextAccessor();
             services.AddSingleton<IJwtAuthManager, JwtAuthManager>();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-            services.AddHostedService<JwtRefreshTokenCache>();
-            services.AddTransient<ITenantProvider, TenantProvider>();
+            services.AddHostedService<JwtRefreshTokenCache>();            
+            services.AddTransient<ITenantProvider, TenantProvider>();            
             services.AddScoped<ICurrentUserService, CurrentUserService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<ISyncService, SyncService>();
