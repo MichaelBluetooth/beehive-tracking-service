@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace MyHiveService.Models
+namespace MyHiveService.Models.DB
 {
     public class InspectionBase : ModelBase
     {

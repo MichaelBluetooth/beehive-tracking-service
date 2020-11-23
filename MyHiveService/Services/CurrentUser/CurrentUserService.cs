@@ -1,6 +1,6 @@
 using System.Linq;
 using Microsoft.AspNetCore.Http;
-using MyHiveService.Models;
+using MyHiveService.Models.DB;
 
 namespace MyHiveService.Services.CurrentUser
 {

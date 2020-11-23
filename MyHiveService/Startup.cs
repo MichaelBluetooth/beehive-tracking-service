@@ -11,7 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using MyHive.Authentication;
-using MyHiveService.Models;
+using MyHiveService.Models.DB;
 using MyHiveService.Services;
 using MyHiveService.Services.CurrentUser;
 using MyHiveService.Services.Download;
@@ -36,7 +36,7 @@ namespace MyHiveService
             services.AddDbContext<MyHiveDbContext>(opt =>
                opt.UseInMemoryDatabase("MyHiveList"));
 
-            services.AddCors();
+            services.AddCors(); //CORS: bad?
 
             services.AddControllers()
             .AddNewtonsoftJson(options =>
@@ -88,8 +88,8 @@ namespace MyHiveService
             app.UseCors(
                 options => options
                     .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowAnyOrigin()
+                    .WithMethods("OPTIONS", "GET", "POST")
+                    .AllowAnyOrigin() //probably OK for now
             );
 
             app.UseHttpsRedirection();

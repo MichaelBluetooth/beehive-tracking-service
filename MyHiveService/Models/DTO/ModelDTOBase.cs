@@ -1,9 +1,9 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MyHiveService.Models
+namespace MyHiveService.Models.DTO
 {
-    public abstract class ModelBase
+    public abstract class ModelDTOBase
     {
         /// <summary>
         /// The unit identifier for this entity

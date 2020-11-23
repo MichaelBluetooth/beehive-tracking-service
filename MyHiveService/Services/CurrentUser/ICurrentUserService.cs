@@ -1,4 +1,4 @@
-using MyHiveService.Models;
+using MyHiveService.Models.DB;
 
 namespace MyHiveService.Services.CurrentUser
 {

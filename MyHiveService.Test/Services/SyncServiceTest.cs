@@ -2,6 +2,7 @@ using System;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using MyHiveService.Models;
+using MyHiveService.Models.DB;
 using MyHiveService.Services;
 using MyHiveService.Test.Utilities;
 using NUnit.Framework;

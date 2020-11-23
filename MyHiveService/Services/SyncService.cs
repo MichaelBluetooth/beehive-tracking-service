@@ -2,12 +2,12 @@ using System.Linq;
 using AutoMapper;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MyHiveService.Models;
+using MyHiveService.Models.DB;
 using MyHiveService.Models.DTO;
 
 namespace MyHiveService.Services
 {
-    public class SyncService: ISyncService
+    public class SyncService : ISyncService
     {
         private readonly MyHiveDbContext _ctx;
         private readonly ILogger<SyncService> _logger;
@@ -20,8 +20,10 @@ namespace MyHiveService.Services
             _mapper = mapper;
         }
 
-        public Hive syncHive(Hive hive)
+        public Hive syncHive(HiveDTO hiveDTO)
         {
+            Hive hive = _mapper.Map<Hive>(hiveDTO);
+
             Hive existing = _ctx.Hives.Where(h => h.id == hive.id).FirstOrDefault();
             if (null == existing)
             {
@@ -41,6 +43,7 @@ namespace MyHiveService.Services
                     existing.lastModified = hive.lastModified;
                     existing.label = hive.label;
                     existing.queenLastSeen = hive.queenLastSeen;
+                    existing.photo = hive.photo;
                     _ctx.Hives.Update(existing);
                     hive = existing;
                 }
@@ -106,8 +109,8 @@ namespace MyHiveService.Services
         }
 
         private InspectionBase _syncInspection<InspectionType, InspectionDTOType>(InspectionDTOType inspectionDTO, DbSet<InspectionType> inspections)
-            where InspectionType: InspectionBase
-            where InspectionDTOType: InspectionBaseDTO
+            where InspectionType : InspectionBase
+            where InspectionDTOType : InspectionBaseDTO
         {
             InspectionType existing = inspections.Where(b => b.id == inspectionDTO.id).FirstOrDefault(); ;
             InspectionType inspection = _mapper.Map<InspectionType>(inspectionDTO);
@@ -139,7 +142,7 @@ namespace MyHiveService.Services
                     existing.broodSpotted = inspection.broodSpotted;
                     existing.date = inspection.date;
                     existing.details = inspection.details;
-                    existing.eggsSpotted = inspection.eggsSpotted;                    
+                    existing.eggsSpotted = inspection.eggsSpotted;
                     inspections.Update(existing);
                     inspection = existing;
                 }

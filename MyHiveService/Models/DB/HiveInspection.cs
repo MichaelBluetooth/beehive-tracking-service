@@ -1,7 +1,7 @@
 using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace MyHiveService.Models
+namespace MyHiveService.Models.DB
 {
     public class HiveInspection : InspectionBase
     {

@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using MyHiveService.Models.DB;
 
 namespace MyHiveService.Models.DTO
 {

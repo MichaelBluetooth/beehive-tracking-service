@@ -1,6 +1,6 @@
 using System;
 using AutoMapper;
-using MyHiveService.Models;
+using MyHiveService.Models.DB;
 using MyHiveService.Models.DTO;
 
 namespace MyHiveService.Profiles

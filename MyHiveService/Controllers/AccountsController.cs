@@ -10,8 +10,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication;
-using MyHiveService.Models;
 using MyHiveService.Services.Tenant;
+using MyHiveService.Models.DB;
 
 namespace MyHiveService.Controllers
 {

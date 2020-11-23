@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MyHiveService.Services.Tenant;
 
-namespace MyHiveService.Models
+namespace MyHiveService.Models.DB
 {
     public class MyHiveDbContext : DbContext
     {

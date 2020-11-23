@@ -5,12 +5,12 @@ using MyHiveService.Models.DTO;
 
 namespace MyHiveService.Profiles
 {
-    public class HiveInspectionProfile : Profile
+    public class HiveProfile : Profile
     {
-        public HiveInspectionProfile()
+        public HiveProfile()
         {
-            CreateMap<HiveInspectionDTO, HiveInspection>();
-            CreateMap<HiveInspectionDTO, HiveInspection>()
+            CreateMap<HiveDTO, Hive>();
+            CreateMap<HiveDTO, Hive>()
                 .ForMember(dto => dto.photo,
                                     e => e.MapFrom(o => Convert.FromBase64String(o.photoBase64.Replace("data:image/jpeg;base64,", "")))); ;
 

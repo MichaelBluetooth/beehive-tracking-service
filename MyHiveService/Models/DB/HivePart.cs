@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace MyHiveService.Models
+namespace MyHiveService.Models.DB
 {
     public class HivePart : ModelBase, IInspectionable<HivePartInspection>
     {

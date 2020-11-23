@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MyHiveService.Models;
+using MyHiveService.Models.DB;
 using MyHiveService.Services.Download;
 
 namespace MyHiveService.Controllers

@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MyHiveService.Models;
+using MyHiveService.Models.DB;
 
 namespace MyHiveService.Controllers
 {

@@ -3,9 +3,8 @@ using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Text;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using MyHiveService.Models;
+using MyHiveService.Models.DB;
 using Newtonsoft.Json;
 
 namespace MyHiveService.Services.Download
@@ -29,6 +28,11 @@ namespace MyHiveService.Services.Download
                 {
                     foreach (Hive hive in hives)
                     {
+                        if (null != hive.photo && hive.photo.Length > 0)
+                        {
+                            _appendHivePhoto(hive, zipArchive);
+                        }
+
                         _appendInspectionPhotos("hive", hive, zipArchive);
                         foreach (HivePart part in hive.parts)
                         {
@@ -81,6 +85,18 @@ namespace MyHiveService.Services.Download
                     {
                         entryStream.CopyTo(zipEntryStream);
                     }
+                }
+            }
+        }
+
+        private void _appendHivePhoto(Hive hive, ZipArchive zipArchive)
+        {
+            ZipArchiveEntry zipEntry = zipArchive.CreateEntry($"hive_photo_{hive.id}.jpeg", CompressionLevel.Fastest);
+            using (var zipEntryStream = zipEntry.Open())
+            {
+                using (var entryStream = new MemoryStream(hive.photo))
+                {
+                    entryStream.CopyTo(zipEntryStream);
                 }
             }
         }

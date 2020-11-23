@@ -2,14 +2,14 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MyHiveService.Models;
+using MyHiveService.Models.DB;
 using MyHiveService.Models.DTO;
 using MyHiveService.Services;
 
 namespace MyHiveService.Controllers
 {
     [ApiController]
-    [Route("sync")]
+    [Route("api/sync")]
     [Authorize]
     public class SyncController : ControllerBase
     {
@@ -26,7 +26,7 @@ namespace MyHiveService.Controllers
 
         [HttpPost]
         [Route("hive")]
-        public async Task<ActionResult<Hive>> SyncHive(Hive hive)
+        public async Task<ActionResult<Hive>> SyncHive(HiveDTO hive)
         {
             _logger.LogInformation("Syncing hive", hive);
             Hive syncd = _syncService.syncHive(hive);

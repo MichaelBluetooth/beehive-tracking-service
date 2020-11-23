@@ -1,5 +1,5 @@
 using System;
-using MyHiveService.Models;
+using MyHiveService.Models.DB;
 
 namespace MyHiveService.TestData
 {

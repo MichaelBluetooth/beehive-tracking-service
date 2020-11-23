@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace MyHiveService.Models
+namespace MyHiveService.Models.DB
 {
     public interface IInspectionable<InspectionType>
         where InspectionType: InspectionBase

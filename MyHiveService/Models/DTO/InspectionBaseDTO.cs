@@ -2,7 +2,7 @@ using System;
 
 namespace MyHiveService.Models.DTO
 {
-    public class InspectionBaseDTO : ModelBase
+    public class InspectionBaseDTO : ModelDTOBase
     {
         public DateTime date { get; set; }
 
