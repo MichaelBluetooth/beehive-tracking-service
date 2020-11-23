@@ -16,6 +16,7 @@ namespace MyHiveService.Test.Utilities
                 cfg.AddProfile(new FrameInspectionProfile());
                 cfg.AddProfile(new HiveInspectionProfile());
                 cfg.AddProfile(new HivePartInspectionProfile());
+                cfg.AddProfile(new HiveProfile());
                 // List<Profile> profiles = new List<Profile>();
                 // foreach (Type type in Assembly.GetAssembly(typeof(Profile)).GetTypes()
                 //             .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(Profile))))

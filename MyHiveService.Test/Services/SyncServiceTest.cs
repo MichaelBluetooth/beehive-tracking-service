@@ -3,6 +3,7 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using MyHiveService.Models;
 using MyHiveService.Models.DB;
+using MyHiveService.Models.DTO;
 using MyHiveService.Services;
 using MyHiveService.Test.Utilities;
 using NUnit.Framework;
@@ -28,13 +29,13 @@ namespace MyHiveService.Test.Services
         public void SyncNewHive()
         {
             SyncService service = new SyncService(_ctx, new MockLogger<SyncService>(), MapperFactory.GetMapper());
-            Hive syncMe = new Hive()
+            HiveDTO syncMe = new HiveDTO()
             {
                 clientId = Guid.NewGuid(),
                 label = "Test1"
             };
-            syncMe = service.syncHive(syncMe);
-            Assert.That(syncMe.id, Is.Not.Null);
+            Hive Syncd = service.syncHive(syncMe);
+            Assert.That(Syncd.id, Is.Not.Null);
         }
 
         [Test]
@@ -49,7 +50,7 @@ namespace MyHiveService.Test.Services
             _ctx.Hives.Add(newer);
             _ctx.SaveChanges();
 
-            Hive older = new Hive()
+            HiveDTO older = new HiveDTO()
             {
                 lastModified = new DateTime(2020, 2, 20),
                 label = "Older label",
@@ -68,16 +69,16 @@ namespace MyHiveService.Test.Services
             Hive older = new Hive()
             {
                 lastModified = new DateTime(2020, 2, 20),
-                label = "Newer label",
-                clientId = Guid.NewGuid()
+                label = "Older label",
+                clientId = Guid.NewGuid(),
             };
             _ctx.Hives.Add(older);
             _ctx.SaveChanges();
 
-            Hive newer = new Hive()
+            HiveDTO newer = new HiveDTO()
             {
-                lastModified = new DateTime(2020, 11, 20),
-                label = "Older label",
+                lastModified = new DateTime(2022, 11, 20),
+                label = "Newer label",
                 clientId = older.clientId,
                 id = older.id
             };
