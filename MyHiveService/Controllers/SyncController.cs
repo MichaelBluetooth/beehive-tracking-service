@@ -9,7 +9,7 @@ using MyHiveService.Services;
 namespace MyHiveService.Controllers
 {
     [ApiController]
-    [Route("api/sync")]
+    [Route("api/[controller]")]
     [Authorize]
     public class SyncController : ControllerBase
     {
