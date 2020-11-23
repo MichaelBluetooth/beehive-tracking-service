@@ -117,19 +117,19 @@ namespace MyHiveService.Services
 
             if (null == inspection.id && null == existing)
             {
-                _logger.LogInformation("Syncing inspection frame", inspection);
+                _logger.LogInformation($"Syncing inspection frame with photo size: {(null != inspection ? inspection.photo.Length : 0)}", inspection);
                 inspections.Add(inspection);
             }
             else
             {
                 if (existing.lastModified > inspection.lastModified)
                 {
-                    _logger.LogInformation("Server has older inspection data", inspection, existing);
+                    _logger.LogInformation("Server has newer inspection data", inspection, existing);
                     inspection = existing;
                 }
                 else
                 {
-                    _logger.LogInformation("Server has older inspection data", inspection, existing);
+                    _logger.LogInformation($"Server has older inspection data. Updating inspection  with photo size: {(null != inspection ? inspection.photo.Length : 0)}", inspection, existing);
                     existing.lastModified = inspection.lastModified;
                     existing.larvaSpotted = inspection.larvaSpotted;
                     existing.orientationFlights = inspection.orientationFlights;
