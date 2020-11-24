@@ -9,7 +9,7 @@ namespace MyHiveService.Models.DB
         [Required]
         public string label { get; set; }
         public int order { get; set; }
-        public DateTime dateAdded { get; set; }
+        public DateTime? dateAdded { get; set; }
         public ICollection<HivePartInspection> inspections { get; set; }
         public string type { get; set; }
 
